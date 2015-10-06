@@ -1,0 +1,17 @@
+Projet :
+
+Bool verification(graphe g, ensemble de sommet X)
+  Pour chaque point de X  test de l'existence avec tous les autres points de X 
+  ->Si il en existe un, on retourne faux
+  
+Bool maximalité(graphe g, ensemble de sommet X)
+  Verification(g,X) pour vérifier s'il est desert 
+  -> Si oui, pour chaque point n'appartenant pas à X test de l'existence avec les points de X
+    -> Si il existe 1 point non relié alors retourne faux.
+    
+ensemble de sommet calcul_de_sous_graphe_desert_max(Graphe g, ensemble_de_sommet X)
+  Prendre un point de X et chercher tous les points qui ne lui sont pas relié
+  -> Si il est relié à tous les points, recommencer avec un autre point X jusqu'à avoir qu'un point qui sera le sous graphe desert
+  
+ensemble de sommet calcul_de_sous_graphe_maximum(Graphe g, ensemble_de_sommet X)
+  ?
