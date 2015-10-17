@@ -5,22 +5,27 @@
 //Initialisation d'un graph par listes
 void initgraphe_l(graphe_l *G,int n){
 	char conf;
-	liste p;
+	liste p,pr;
 	G->n=n;
 	G->a=(liste *)malloc(sizeof(liste *)*n);
 	for(int i=0;i<G->n;i++){
-
 		G->a[i]=(liste)malloc(sizeof(liste));
 		G->a[i]=NULL;
+	}
+	for(int i=0;i<G->n;i++){
 		for(int j=i;j<G->n;j++){
 			printf("Arête entre %d et %d?\n",i,j);
 			conf=getchar();
 			getchar();
 			if(conf=='y'){
 				p=(liste)malloc(sizeof(liste));
+				pr=(liste)malloc(sizeof(liste));
 				p->st=j;
 				p->suivant=G->a[i];
 				G->a[i]=p;
+				pr->st=i;
+				pr->suivant=G->a[j];
+				G->a[j]=pr;
 			}
 		}
 	}
@@ -37,7 +42,7 @@ void printgraph_l(graphe_l G){
 			printf("%d %d\n",i,p->st);
 			p=p->suivant;
 		}
-	}
+	}	
 }
 
 //Test d'existence d'une arête pour graphe liste

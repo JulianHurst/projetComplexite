@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
 	printf("Initialisation du graphe matriciel :\n");
 	initgraphe_m(&gm,4);
 	printf("\nInitialisation du graphe par listes:\n");
-	initgraphe_l(&gl,5);
+	initgraphe_l(&gl,5);	
 	printf("\nInitialisation de l'ensemble de sommets:\n");
 	if(init_ens_de_sommets(&e,3))
 		return 1;
