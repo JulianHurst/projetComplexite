@@ -10,9 +10,9 @@ int main(int argc, char *argv[]){
 	graphe_l gl;
 	ens_de_sommets e;
 	printf("\nInitialisation du graphe par listes:\n");
-	initgraphe_l(&gl,5);	
+	initgraphe_l(&gl,2);	
 	printf("\nInitialisation de l'ensemble de sommets:\n");
-	if(init_ens_de_sommets(&e,3))
+	if(init_ens_de_sommets(&e,1))
 		return 1;
 	printf("\n\n---------Listes--------------\n\n");
 	printgraph_l(gl);
@@ -20,5 +20,9 @@ int main(int argc, char *argv[]){
 		printf("Sous-graphe désert!\n");
 	else
 		printf("Pas un sous-graphe désert!\n");
+	if(maximal(gl,e))
+		printf("Maximal !\n");
+	else
+		printf("Pas Maximal !\n");
 	return 0;
 }
