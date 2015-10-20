@@ -47,7 +47,7 @@ int verification_m(graphe_m G, ens_de_sommets e){
 		for(j=i;j<e.n && !echap;j++)
 			if(e.som[j]>=G.n || arete_m(G,e.som[i],e.som[j]))
 				echap=1;
-	if(echap==0)
+	if(!echap)
 		return 1;
 	return 0;
 }
