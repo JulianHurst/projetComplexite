@@ -64,7 +64,5 @@ int verification_l(graphe_l G,ens_de_sommets e){
 		for(j=i;j<e.n && !echap;j++)
 			if(e.som[j]>=G.n || arete_l(G,e.som[i],e.som[j]))
 				echap=1;
-	if(!echap)
-		return 1;
-	return 0;
+	return !echap;
 }
