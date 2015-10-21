@@ -14,12 +14,13 @@ int main(int argc, char *argv[]){
 	printf("\nInitialisation de l'ensemble de sommets:\n");
 	if(init_ens_de_sommets(&e,1))
 		return 1;
-	printf("\n\n---------Listes--------------\n\n");
 	printgraph_l(gl);
+  	printf("\n\n----------Vérification----------\n\n");
 	if(verification_l(gl,e)==1)
 		printf("Sous-graphe désert!\n");
 	else
 		printf("Pas un sous-graphe désert!\n");
+  	printf("----------Maximalité----------\n\n");
 	if(maximal(gl,e))
 		printf("Maximal !\n");
 	else
