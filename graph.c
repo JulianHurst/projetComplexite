@@ -15,15 +15,16 @@ int main(int argc, char *argv[]){
 	if(init_ens_de_sommets(&e,1))
 		return 1;
 	printgraph_l(gl);
-  	printf("\n\n----------Vérification----------\n\n");
+  	printf("\n\n----------Vérification----------\n");
 	if(verification_l(gl,e)==1)
 		printf("Sous-graphe désert!\n");
 	else
 		printf("Pas un sous-graphe désert!\n");
-  	printf("----------Maximalité----------\n\n");
+  	printf("\n----------Maximalité----------\n");
 	if(maximal(gl,e))
 		printf("Maximal !\n");
 	else
 		printf("Pas Maximal !\n");
+	printf("\n");
 	return 0;
 }
