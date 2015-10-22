@@ -35,3 +35,11 @@ void init_ens_de_sommets_bool(ens_de_sommets *e,int n){    //avec n = G.n
 	e->som[i]=0;
   }
 }
+
+int contains(ens_de_sommets e,int x){
+	int i;
+	for(i=0;i<e.n && e.som[i]!=x;i++);
+	if(i==e.n)
+		return 0;
+	return 1;
+}
