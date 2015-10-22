@@ -61,17 +61,15 @@ int maximal(graphe_l g, ens_de_sommets e)
 {
     int x=0;
     int ok=1;
-    if(verification_l(g,e))
+    if(verification_l_bool(g,e))
     {
         do
         {
             if(!e.som[x])
             {
                 e.som[x]=1;
-                e.n++;				
-                ok=!verification_l(g,e);   
+                ok=!verification_l_bool(g,e);   
                 e.som[x]=0;
-                e.n--;                
             }
             x=x+1;
         }while((x<g.n) && ok);
@@ -87,6 +85,16 @@ int verification_l(graphe_l G,ens_de_sommets e){
 	for(i=0;i<e.n && !echap;i++)
 		for(j=i;j<e.n && !echap;j++)
 			if(e.som[j]>=G.n || arete_l(G,e.som[i],e.som[j]))
+				echap=1;
+	return !echap;
+}
+
+//Vérifie si e est un sous-graphe désert de G version bool
+int verification_l_bool(graphe_l G,ens_de_sommets e){
+	int i,j=0,echap=0;
+	for(i=0;i<e.n && !echap;i++)
+		for(j=i;j<e.n && !echap;j++)
+			if((e.som[i] && e.som[j]) && arete_l(G,i,j))
 				echap=1;
 	return !echap;
 }
