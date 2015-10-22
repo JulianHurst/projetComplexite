@@ -36,6 +36,7 @@ void init_ens_de_sommets_bool(ens_de_sommets *e,int n){    //avec n = G.n
   }
 }
 
+//Vérifie si l'ensemble de sommets contient le sommet x
 int contains(ens_de_sommets e,int x){
 	int i;
 	for(i=0;i<e.n && e.som[i]!=x;i++);
