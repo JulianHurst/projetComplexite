@@ -3,7 +3,7 @@
 #include "graph.h"
 
 //Initialise un ensemble de sommets
-int init_ens_de_sommets(ens_de_sommets *e,int n){
+/*int init_ens_de_sommets(ens_de_sommets *e,int n){
   int som,ret=0;
   e->n=n;
   e->som=(int *)malloc(sizeof(int *));
@@ -18,10 +18,10 @@ int init_ens_de_sommets(ens_de_sommets *e,int n){
     }
   }
   return ret;
-}
+}*/
 
 //Initialise un ensemble de sommets avec un tableau de bool
-void init_ens_de_sommets_bool(ens_de_sommets *e,int n){    //avec n = G.n
+/*void init_ens_de_sommets_bool(ens_de_sommets *e,int n){    //avec n = G.n
   char conf;
   e->n=n;
   e->som=(int *)malloc(sizeof(int *));
@@ -29,10 +29,18 @@ void init_ens_de_sommets_bool(ens_de_sommets *e,int n){    //avec n = G.n
     printf("Sommet %d (y/n) : ",i);
     conf=getchar();
     getchar();
-    if(conf=='y')  
+    if(conf=='y')
     	e->som[i]=1;
     else
 	e->som[i]=0;
+  }
+}*/
+
+void init_ens_de_sommets_bool2(ens_de_sommets *e,int n){
+  e->n=n;
+  //e->som=(int *)malloc(sizeof(int *));
+  for(int i=0;i<e->n;i++){
+      e->som[i]=0;
   }
 }
 
@@ -43,4 +51,29 @@ int contains(ens_de_sommets e,int x){
 	if(i==e.n)
 		return 0;
 	return 1;
+}
+
+void print_ensemble(ens_de_sommets e){
+    int i;
+    for(i=0;i<e.n;i++){
+        printf("Sommet %d = %d\n",i,e.som[i]);
+    }
+}
+
+void copie_ens(ens_de_sommets *e_src, ens_de_sommets *e_dest, int n){
+	int i;
+	e_dest->n=e_src->n;
+	for(i=0; i<n; i++) e_dest->som[i] = e_src->som[i];
+}
+
+void lecture_ens(ens_de_sommets *e, char liste_e[]){
+    int i = 0;
+    char* smt=NULL;
+    smt = strtok(liste_e,",");
+
+	while(smt != NULL){
+		e->som[i] = atoi(smt);
+		smt = strtok(NULL,",");
+		i = i + 1;
+	}
 }

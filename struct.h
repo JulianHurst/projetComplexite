@@ -1,10 +1,6 @@
-typedef int sommet;
+#define n_max 1024
 
-//Matrice
-typedef struct {
-	int n;
-	int **a;
-}graphe_m;
+typedef int sommet;
 
 //Liste d'adjacence
 typedef struct chainon{
@@ -15,12 +11,12 @@ typedef struct chainon{
 typedef Couple *liste;
 
 typedef struct {
-	liste *a;
-	int n;
+	liste *a[n_max];
+	int n;  // nombre de sommets
 }graphe_l;
 
 //typedef liste ens_de_sommets;
 typedef struct {
 	int n;
-	sommet *som;
+	sommet som[n_max];
 }	ens_de_sommets;
