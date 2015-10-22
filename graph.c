@@ -22,7 +22,7 @@ int main(int argc, char *argv[]){
 	else
 		printf("Pas un sous-graphe désert!\n");
   	printf("\n----------Maximalité----------\n");
-	if(maximal(gl,e))
+	if(maximal_bool(gl,e))
 		printf("Maximal !\n");
 	else
 		printf("Pas Maximal !\n");

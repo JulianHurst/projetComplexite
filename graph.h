@@ -6,7 +6,7 @@ int verification_l(graphe_l G, ens_de_sommets e);
 int verification_l_bool(graphe_l G, ens_de_sommets e);
 void initgraphe_l(graphe_l *G,int n);
 void printgraph_l(graphe_l G);
-int maximal(graphe_l g,ens_de_sommets e);
+int maximal_bool(graphe_l g,ens_de_sommets e);
 
 //Fonctions utiles
 int init_ens_de_sommets(ens_de_sommets *e,int n);
