@@ -57,6 +57,31 @@ int arete_l(graphe_l g,sommet x,sommet y){
 		return 1;
 }
 
+int maximal(graphe_l g, ens_de_sommets e)
+{
+    int x=0;
+    int ok=1;
+    int i=e.n;
+    if(verification_l(g,e))
+    {
+        do
+        {
+            if(!contains(e,x))
+            {
+                e.som[i]=x;
+                e.n++;				
+                ok=!verification_l(g,e);   
+                e.som[i]=-1;
+                e.n--;                
+            }
+            x=x+1;
+        }while((x<g.n) && ok);
+    }
+    else
+        ok=0;
+    return ok;
+}
+
 int maximal_bool(graphe_l g, ens_de_sommets e)
 {
     int x=0;
