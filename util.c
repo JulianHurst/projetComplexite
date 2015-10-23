@@ -60,13 +60,26 @@ void print_ensemble(ens_de_sommets e){
     }
 }
 
-void copie_ens(ens_de_sommets *e_src, ens_de_sommets *e_dest, int n){
+/**
+ * Copie l'ensemble e_src dans l'ensemble e_dest
+ * @param e_src ensemble de sommets source
+ * @param e_dest ensemble de sommets de destination
+ * @param n entier correspondant à la taille des ensembles de sommet.
+ * @author Tristan NARI
+ */
+void copie_ens(ens_de_sommets *e_src,ens_de_sommets *e_dest,int n){
 	int i;
 	e_dest->n=e_src->n;
 	for(i=0; i<n; i++) e_dest->som[i] = e_src->som[i];
 }
 
-void lecture_ens(ens_de_sommets *e, char liste_e[]){
+/**
+ * Remplie le tableau d'ensemble en fonction d'une chaine de texte de nombre 0 et 1 séparé par des virgules
+ * @param e ensemble de sommets
+ * @param liste_e chaine de caractère
+ * @author Tristan NARI
+ */
+void lecture_ens(ens_de_sommets *e,char liste_e[]){
     int i = 0;
     char* smt=NULL;
     smt = strtok(liste_e,",");
