@@ -13,7 +13,8 @@ int main(int argc, char *argv[]){
 	graphe_l gl;
 	char * nfichier = argv[2];
 	init_graphe(&gl);
-    lecture(nfichier,&gl);
+    if(!lecture(nfichier,&gl))
+    	fprintf(stderr,"Le fichier n'existe pas ou ne peut pas être ouvert en lecture!");
     ens_de_sommets e;
     init_ens_de_sommets_bool2(&e,gl.n);
 
