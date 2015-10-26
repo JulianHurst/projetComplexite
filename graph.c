@@ -14,7 +14,7 @@ int main(int argc, char *argv[]){
 	char * nfichier = argv[2];
 	init_graphe(&gl);
     if(!lecture(nfichier,&gl)){
-    	fprintf(stderr,"Le fichier n'existe pas ou ne peut pas être ouvert en lecture!");
+    	fprintf(stderr,"Le fichier n'existe pas ou ne peut pas être ouvert en lecture!\n");
     	return 1;
     }
     ens_de_sommets e;
