@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "graph.h"
 #include <sys/time.h>
 
 int main(int argc, char *argv[]){
-    struct timeval t0,t1;
-	struct timezone tz;
-	long diff;
-
 	if(argc<=2){
 		fprintf(stderr,"Erreur : %s prend un nom de fonction et de fichier de graphe en argument.\n",argv[0]);
 		exit(1);
@@ -20,7 +17,6 @@ int main(int argc, char *argv[]){
     ens_de_sommets e;
     init_ens_de_sommets_bool2(&e,gl.n);
 
-    gettimeofday(&t0, &tz);
     if(strcmp(argv[1],"verification")==0){
         lecture_ens(&e,argv[3]);
         if(verification_l_bool(gl,e))
@@ -58,7 +54,4 @@ int main(int argc, char *argv[]){
     else{
         printf("Vous vous etes trompe dans le nom de la fonction.\n");
     }
-    gettimeofday(&t1, &tz);
-    diff=(t1.tv_sec-t0.tv_sec) * 1000000L + (t1.tv_usec-t0.tv_usec);
-    printf("Temps effectif : %ld us\n", diff);
 }

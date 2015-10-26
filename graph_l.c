@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "graph.h"
 
 //Initialisation d'un graph par listes
@@ -43,7 +44,7 @@ void init_graphe(graphe_l *g)
 }
 
 /* Lexture de fichier de graphe */
-int lecture(char * f, graphe_l * g)
+int lecture(char * f,graphe_l * g)
 {
     FILE* fichier = NULL;
     init_graphe(g);
@@ -70,7 +71,7 @@ int lecture(char * f, graphe_l * g)
     else return 0;
 }
 
-void ajouter_arc(sommet x, sommet y, graphe_l *g)
+void ajouter_arc(sommet x,sommet y,graphe_l *g)
 {
 	liste p = (liste)malloc(sizeof(Couple));
 	liste q = (liste)malloc(sizeof(Couple));
@@ -136,7 +137,7 @@ int verification_l_bool(graphe_l G,ens_de_sommets e){
 }
 
 /* Maximalité vérifie si un ensemble est maximal*/
-int maximal(graphe_l g, ens_de_sommets e)
+int maximal(graphe_l g,ens_de_sommets e)
 {
     int x=0;
     int ok=1;
@@ -162,7 +163,7 @@ int maximal(graphe_l g, ens_de_sommets e)
 }
 
 /* Maximalité vérifie si un ensemble est maximal*/
-int maximal_bool(graphe_l g, ens_de_sommets e)
+int maximal_bool(graphe_l g,ens_de_sommets e)
 {
     int x=0;
     int ok=1;
@@ -235,6 +236,7 @@ ens_de_sommets maximum_complete(graphe_l G){
  * @param G Graphe non-orienté
  * @return L'ensemble maximum calculé
  * @author Tristan NARI
+ * @complexite O(n^2)
  */
 ens_de_sommets maximimum_incomplete_l(graphe_l G){
     int Kmax=0;
@@ -271,8 +273,9 @@ ens_de_sommets maximimum_incomplete_l(graphe_l G){
  * @param e ensemble de sommets
  * @param i entier correspondant au sommet sélectionné
  * @author Tristan NARI
+ * @complexite O(n)
  */
-void creation_maximum(graphe_l G, ens_de_sommets *e, int i){
+void creation_maximum(graphe_l G,ens_de_sommets *e, int i){
     int j;
     e->som[i]=1;
     for(j = 0;j<G.n;j++){
