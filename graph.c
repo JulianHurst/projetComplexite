@@ -7,14 +7,16 @@
 int main(int argc, char *argv[]){
 	if(argc<=2){
 		fprintf(stderr,"Erreur : %s prend un nom de fonction et de fichier de graphe en argument.\n",argv[0]);
-		exit(1);
+		return 1;
 	}
 
 	graphe_l gl;
 	char * nfichier = argv[2];
 	init_graphe(&gl);
-    if(!lecture(nfichier,&gl))
+    if(!lecture(nfichier,&gl)){
     	fprintf(stderr,"Le fichier n'existe pas ou ne peut pas être ouvert en lecture!");
+    	return 1;
+    }
     ens_de_sommets e;
     init_ens_de_sommets_bool2(&e,gl.n);
 
@@ -44,4 +46,5 @@ int main(int argc, char *argv[]){
     }else{
         printf("Vous vous etes trompe dans le nom de la fonction.\n");
     }
+    return 0;
 }
