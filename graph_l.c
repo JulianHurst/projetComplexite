@@ -193,10 +193,9 @@ int maximal_bool(graphe_l g,ens_de_sommets e)
 **/
 ens_de_sommets maximum_complete(graphe_l G){
     int x = 0;
-    int cpt = 0;
+    int cpt = G.n;
     int max = 0;
     int offset = 0;         //Décallage de sommet.
-    int i;
 
     ens_de_sommets e;       //Enssemble de sommet à conserver
     ens_de_sommets tmp;     //Ensemble de sommet temporaire pour chaque itérations
@@ -205,21 +204,27 @@ ens_de_sommets maximum_complete(graphe_l G){
     //Boucle pour départ à chaque sommet
     while(offset < G.n){
         init_ens_de_sommets_un_bool2(&tmp,G.n);
-        cpt = 0;
+        cpt = G.n;
         x = offset;
         //Première boucle passage des sommets de 1 à 1 vers le suivant
         do{
             tmp.som[x] = 0;
+            cpt--;
             x++;
-        }while(verification_l_bool(G, tmp));
+        }while(!verification_l_bool(G, tmp) && x <= G.n);
+        x--;
         //Deuxième boucle passage des sommets de 1 à 1 vers le précédent
-        do{
-            tmp.som[x] = 1;
+        while(x >=0){
+            if(tmp.som[x]==0){
+                tmp.som[x] = 1;
+                cpt++;
+            }
             if(!verification_l_bool(G, tmp)){
                 tmp.som[x] = 0;
+                cpt--;
             }
             x--;
-        }while(x > 0);
+        }
         if(cpt > max){
             for(int i = 0; i<G.n; i++){
                 e.som[i] = tmp.som[i];
