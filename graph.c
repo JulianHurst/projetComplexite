@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "graph.h"
-#include <sys/time.h>
 
 int main(int argc, char *argv[]){
 	if(argc<=2){
@@ -14,11 +13,11 @@ int main(int argc, char *argv[]){
 	char * nfichier = argv[2];
 	init_graphe(&gl);
     if(!lecture(nfichier,&gl)){
-    	fprintf(stderr,"Le fichier n'existe pas ou ne peut pas Ãªtre ouvert en lecture!\n");
+    	fprintf(stderr,"Le fichier n'existe pas ou ne peut pas être ouvert en lecture!\n");
     	return 1;
     }
     ens_de_sommets e;
-    init_ens_de_sommets_bool2(&e,gl.n);
+    init_ens_de_sommets_bool(&e,gl.n);
 
     if(strcmp(argv[1],"verification")==0){
         lecture_ens(&e,argv[3]);
@@ -34,9 +33,13 @@ int main(int argc, char *argv[]){
             printf("Pas Maximal !\n");
         printf("\n");
     }else if(strcmp(argv[1],"maximal")==0){
-
+        if(argc==3){
+            print_ensemble(calcul_maximal_bool(gl));
+        }else{
+            printf("Nombre d'argument incorrect pour la fonction maximum incomplet.\n");
+        }
     }else if(strcmp(argv[1],"maximum_exacte")==0){
-
+        /* A COMPLETER */
     }else if(strcmp(argv[1],"maximum_incomplete")==0){
         if(argc==3){
             print_ensemble(maximimum_incomplete_l(gl));
@@ -46,5 +49,4 @@ int main(int argc, char *argv[]){
     }else{
         printf("Vous vous etes trompe dans le nom de la fonction.\n");
     }
-    return 0;
 }

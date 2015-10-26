@@ -3,55 +3,36 @@
 #include <string.h>
 #include "graph.h"
 
-//Initialisation d'un graph par listes
-/*void initgraphe_l(graphe_l *G,int n){
-	char conf;
-	liste p,pr;
-	G->n=n;
-	G->a=(liste *)malloc(sizeof(liste *)*n);
-	for(int i=0;i<G->n;i++){
-		G->a[i]=(liste)malloc(sizeof(liste));
-		G->a[i]=NULL;
-	}
-	for(int i=0;i<G->n;i++){
-		for(int j=i;j<G->n;j++){
-			printf("Arête entre %d et %d?\n",i,j);
-			conf=getchar();
-			getchar();
-			if(conf=='y'){
-				p=(liste)malloc(sizeof(liste));
-				pr=(liste)malloc(sizeof(liste));
-				p->st=j;
-				p->suivant=G->a[i];
-				G->a[i]=p;
-				pr->st=i;
-				pr->suivant=G->a[j];
-				G->a[j]=pr;
-			}
-		}
-	}
-}*/
-
+/**
+ * Initialisation du graphe g.
+ * @param g Graphe non-orienté
+ * @author Julian HURST
+ * @complexite O(n) correspondant au nombre d'arrêtes
+ */
 void init_graphe(graphe_l *g)
 {
 	sommet i;
 	g->n = 0;
-	//g->m = 0;
 	for(i=0; i<n_max; i++)
 	{
 		g->a[i] = NULL;
 	}
 }
 
-/* Lexture de fichier de graphe */
+/**
+ * Remplit le graphe g en fonction des données du fichier f.
+ * @param f nom du fichier
+ * @param g Graphe non-orienté
+ * @author Tristan NARI
+ * @complexite O(n^2)
+ */
 int lecture(char * f,graphe_l * g)
 {
     FILE* fichier = NULL;
     init_graphe(g);
-    int n, m, i;
-    int a, b;
+    int n, m, i, a, b;
     char chemin[100];
-    strcpy(chemin,"Benchs/");
+    strcpy(chemin, "Benchs/");
     strcat(chemin,f);
     fichier = fopen(chemin, "r");
 
@@ -59,7 +40,6 @@ int lecture(char * f,graphe_l * g)
     {
         fscanf(fichier, "%d %d", &n, &m);
 		g->n = n;
-		//g->m = m;
 		for(i=0; i<m; i++)
 		{
 			fscanf(fichier, "%d %d", &a, &b);
@@ -71,6 +51,14 @@ int lecture(char * f,graphe_l * g)
     else return 0;
 }
 
+/**
+ * Ajoute un arc au graphe
+ * @param x sommet (entier)
+ * @param y sommet (entier)
+ * @param g Graphe non-orienté
+ * @author Tristan NARI
+ * @complexite O(n)
+ */
 void ajouter_arc(sommet x,sommet y,graphe_l *g)
 {
 	liste p = (liste)malloc(sizeof(Couple));
@@ -85,12 +73,23 @@ void ajouter_arc(sommet x,sommet y,graphe_l *g)
 	g->a[y] = q;
 }
 
+/**
+ * Ajoute un sommet au graphe
+ * @param g Graphe non-orienté
+ * @author Tristan NARI
+ * @complexite O(1)
+ */
 void ajouter_sommet(graphe_l * g)
 {
 	g->n = g->n + 1;
 }
 
-//Affiche le nombre de sommets et les arrêtes
+/**
+ * Affiche le nombre de sommets et les arrêtes
+ * @param G Graphe non-orienté
+ * @author Julian HURST
+ * @complexite O(n) correspondant au nombre d'arrêtes
+ */
 void printgraph_l(graphe_l G){
 	liste p;
 	printf("Il y a %d sommets\n",G.n);
@@ -104,7 +103,15 @@ void printgraph_l(graphe_l G){
 	}
 }
 
-//Test d'existence d'une arête pour graphe liste
+/**
+ * Test d'existence d'une arête pour graphe liste
+ * @param G Graphe non-orienté
+ * @param x sommet (entier)
+ * @param y sommet (entier)
+ * @return entier renvoi 1 si est sous-graphe désert sinon 0.
+ * @author Julian HURST
+ * @complexite O(n)
+ */
 int arete_l(graphe_l g,sommet x,sommet y){
 	liste p;
 	p=g.a[x];
@@ -116,17 +123,14 @@ int arete_l(graphe_l g,sommet x,sommet y){
 		return 1;
 }
 
-//Vérifie si e est un sous-graphe désert de G
-int verification_l(graphe_l G,ens_de_sommets e){
-	int i,j=0,echap=0;
-	for(i=0;i<e.n && !echap;i++)
-		for(j=i;j<e.n && !echap;j++)
-			if(e.som[j]>=G.n || arete_l(G,e.som[i],e.som[j]))
-				echap=1;
-	return !echap;
-}
-
-//Vérifie si e est un sous-graphe désert de G version bool
+/**
+ * Vérifie si e est un sous-graphe désert de G version bool
+ * @param G Graphe non-orienté
+ * @param e ensemble de sommets
+ * @return entier echap, renvoi 1 si est sous-graphe désert sinon 0.
+ * @author Julian HURST
+ * @complexite O(n^2)
+ */
 int verification_l_bool(graphe_l G,ens_de_sommets e){
 	int i,j=0,echap=0;
 	for(i=0;i<e.n && !echap;i++)
@@ -136,33 +140,14 @@ int verification_l_bool(graphe_l G,ens_de_sommets e){
 	return !echap;
 }
 
-/* Maximalité vérifie si un ensemble est maximal*/
-int maximal(graphe_l g,ens_de_sommets e)
-{
-    int x=0;
-    int ok=1;
-    int i=e.n;
-    if(verification_l(g,e))
-    {
-        do
-        {
-            if(!contains(e,x))
-            {
-                e.som[i]=x;
-                e.n++;
-                ok=!verification_l(g,e);
-                e.som[i]=-1;
-                e.n--;
-            }
-            x=x+1;
-        }while((x<g.n) && ok);
-    }
-    else
-        ok=0;
-    return ok;
-}
-
-/* Maximalité vérifie si un ensemble est maximal*/
+/**
+ * Maximalité, vérifie si un ensemble est maximal
+ * @param G Graphe non-orienté
+ * @param e ensemble de sommets
+ * @return entier ok, renvoi 1 si est maximal sinon 0.
+ * @author Ibrahim OMAR
+ * @complexite O(n^3)
+ */
 int maximal_bool(graphe_l g,ens_de_sommets e)
 {
     int x=0;
@@ -186,19 +171,39 @@ int maximal_bool(graphe_l g,ens_de_sommets e)
 }
 
 /**
+ * Calcul un ensemble maximal du graphe en partant du premier sommet.
+ * @param G Graphe non-orienté
+ * @return L'ensemble maximal calculé
+ * @author Clément AKRICHE
+ * @complexite O(n^3)
+ */
+ens_de_sommets calcul_maximal_bool(graphe_l G){
+    int i=0;
+    ens_de_sommets e;
+    init_ens_de_sommets_bool(&e,G.n);
+    do{
+        e.som[i]=1;
+        if(!verification_l_bool(G,e))
+            e.som[i]=0;
+        i++;
+    }while(i<G.n);
+    return e;
+}
+
+/**
  * Calcul de manière incomplète un sous graphe desert maximum.
  * @param G Graphe non-orienté
  * @return L'ensemble maximum calculé
  * @author Tristan NARI
- * @complexite O(n^2)
+ * @complexite O(n^4)
  */
 ens_de_sommets maximimum_incomplete_l(graphe_l G){
     int Kmax=0;
     int Ktmp=0;
     ens_de_sommets e;
-    init_ens_de_sommets_bool2(&e,G.n);
+    init_ens_de_sommets_bool(&e,G.n);
     ens_de_sommets emax;
-    init_ens_de_sommets_bool2(&emax,G.n);
+    init_ens_de_sommets_bool(&emax,G.n);
     int i,j;
     //parcours du nombre de nombre
     for(i=0;i<G.n;i++){
@@ -214,7 +219,7 @@ ens_de_sommets maximimum_incomplete_l(graphe_l G){
             copie_ens(&e,&emax,G.n);
         }
         //met à 0 pour le prochain passage dans la boucle
-        init_ens_de_sommets_bool2(&e,G.n);
+        init_ens_de_sommets_bool(&e,G.n);
         Ktmp=0;
     }
     //printf("%K maximal trouve : d\n",Kmax);
@@ -227,7 +232,7 @@ ens_de_sommets maximimum_incomplete_l(graphe_l G){
  * @param e ensemble de sommets
  * @param i entier correspondant au sommet sélectionné
  * @author Tristan NARI
- * @complexite O(n)
+ * @complexite O(n^3)
  */
 void creation_maximum(graphe_l G,ens_de_sommets *e, int i){
     int j;
@@ -240,4 +245,3 @@ void creation_maximum(graphe_l G,ens_de_sommets *e, int i){
         }
     }
 }
-
