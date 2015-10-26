@@ -185,6 +185,52 @@ int maximal_bool(graphe_l g, ens_de_sommets e)
 }
 
 /**
+* Calcul de manière complète du sous graphe desert maximum
+* @param G graphe non-orienté
+* @return l'ensemble des sommets validé
+* @author Kevin Garabedian
+**/
+ens_de_sommets maximum_complete(graphe_l G){
+    int x = 0;
+    int cpt = 0;
+    int max = 0;
+    int offset = 0;         //Décallage de sommet.
+    int i;
+
+    ens_de_sommets e;       //Enssemble de sommet à conserver
+    ens_de_sommets tmp;     //Ensemble de sommet temporaire pour chaque itérations
+    init_ens_de_sommets_un_bool2(&e,G.n);
+
+    //Boucle pour départ à chaque sommet
+    while(offset < G.n){
+        init_ens_de_sommets_un_bool2(&tmp,G.n);
+        cpt = 0;
+        x = offset;
+        //Première boucle passage des sommets de 1 à 1 vers le suivant
+        do{
+            tmp.som[x] = 0;
+            x++;
+        }while(verification_l_bool(G, tmp));
+        //Deuxième boucle passage des sommets de 1 à 1 vers le précédent
+        do{
+            tmp.som[x] = 1;
+            if(!verification_l_bool(G, tmp)){
+                tmp.som[x] = 0;
+            }
+            x--;
+        }while(x > 0);
+        if(cpt > max){
+            for(int i = 0; i<G.n; i++){
+                e.som[x] = tmp.som[x];
+            }
+            max = cpt;
+        }
+        offset++;
+    }
+    return e;
+}
+
+/**
  * Calcul de manière incomplète un sous graphe desert maximum.
  * @param G Graphe non-orienté
  * @return L'ensemble maximum calculé

@@ -27,24 +27,35 @@ int main(int argc, char *argv[]){
             printf("L'ensemble est sous-graphe desert\n");
         else
             printf("L'ensemble n'est pas sous-graphe desert\n");
-    }else if(strcmp(argv[1],"maximalite")==0){
+    }
+    else if(strcmp(argv[1],"maximalite")==0){
         lecture_ens(&e,argv[3]);
         if(maximal_bool(gl,e))
             printf("Maximal !\n");
         else
             printf("Pas Maximal !\n");
         printf("\n");
-    }else if(strcmp(argv[1],"maximal")==0){
+    }
+    else if(strcmp(argv[1],"maximal")==0){
 
-    }else if(strcmp(argv[1],"maximum_exacte")==0){
-
-    }else if(strcmp(argv[1],"maximum_incomplete")==0){
+    }
+    else if(strcmp(argv[1],"maximum_exacte")==0){  
         if(argc==3){
-            print_ensemble(maximimum_incomplete_l(gl));
-        }else{
+            print_ensemble(maximum_complete(gl));
+        }
+        else{
             printf("Nombre d'argument incorrect pour la fonction maximum incomplet.\n");
         }
-    }else{
+    }
+    else if(strcmp(argv[1],"maximum_incomplete")==0){
+        if(argc==3){
+            print_ensemble(maximimum_incomplete_l(gl));
+        }
+        else{
+            printf("Nombre d'argument incorrect pour la fonction maximum incomplet.\n");
+        }
+    }
+    else{
         printf("Vous vous etes trompe dans le nom de la fonction.\n");
     }
     gettimeofday(&t1, &tz);

@@ -43,6 +43,16 @@ void init_ens_de_sommets_bool2(ens_de_sommets *e,int n){
       e->som[i]=0;
   }
 }
+/**
+* Initialisaton du tableau de sommet tout à 1
+*/
+void init_ens_de_sommets_un_bool2(ens_de_sommets *e,int n){
+  e->n=n;
+  //e->som=(int *)malloc(sizeof(int *));
+  for(int i=0;i<e->n;i++){
+      e->som[i]=1;
+  }
+}
 
 //Vérifie si l'ensemble de sommets contient le sommet x
 int contains(ens_de_sommets e,int x){
