@@ -51,8 +51,7 @@ int lecture(char * f,graphe_l * g)
     int n, m, i;
     int a, b;
     char chemin[100];
-    strcpy(chemin, "Benchs/");
-    strcat(chemin,f);
+    strcpy(chemin,f);
     fichier = fopen(chemin, "r");
 
     if (fichier != NULL)
