@@ -11,7 +11,7 @@ typedef struct chainon{
 typedef Couple *liste;
 
 typedef struct {
-	liste *a[n_max];
+	liste a[n_max];
 	int n;  // nombre de sommets
 }graphe_l;
 

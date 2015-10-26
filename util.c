@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "graph.h"
 
 //Initialise un ensemble de sommets
@@ -83,7 +84,7 @@ void lecture_ens(ens_de_sommets *e,char liste_e[]){
     int i = 0;
     char* smt=NULL;
     smt = strtok(liste_e,",");
-
+    printf("smt : %d\n",atoi(smt));
 	while(smt != NULL){
 		e->som[i] = atoi(smt);
 		smt = strtok(NULL,",");
