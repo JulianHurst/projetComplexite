@@ -222,7 +222,7 @@ ens_de_sommets maximum_complete(graphe_l G){
         }while(x > 0);
         if(cpt > max){
             for(int i = 0; i<G.n; i++){
-                e.som[x] = tmp.som[x];
+                e.som[i] = tmp.som[i];
             }
             max = cpt;
         }
