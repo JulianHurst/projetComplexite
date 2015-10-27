@@ -60,6 +60,7 @@ void print_ensemble(ens_de_sommets e){
  * @param e_dest ensemble de sommets de destination
  * @param n entier correspondant à la taille des ensembles de sommet.
  * @author Tristan NARI
+ * @complexite O(n)
  */
 void copie_ens(ens_de_sommets e_src,ens_de_sommets *e_dest,int n){
 	int i;
@@ -72,16 +73,15 @@ void copie_ens(ens_de_sommets e_src,ens_de_sommets *e_dest,int n){
  * @param e ensemble de sommets
  * @param liste_e chaine de caractère
  * @author Tristan NARI
+ * @complexite O(n)
  */
 void lecture_ens(ens_de_sommets *e,char liste_e[]){
-    int i = 0;
     char* smt=NULL;
     smt = strtok(liste_e,",");
 
 	while(smt != NULL){
-		e->som[i] = atoi(smt);
+		e->som[atoi(smt)] = 1;
 		smt = strtok(NULL,",");
-		i = i + 1;
 	}
 }
 

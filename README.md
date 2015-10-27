@@ -13,12 +13,10 @@ Consigne:
 Les fichiers des graphes doivent se situer dans le dossier "Benchs" qui est à la racine.
 	
 -Troisième argument si il y a besoin est sous le format x,x,x...
-x correspond à un 0 ou 1.
+x correspond au numéro du sommet à 1.
 Chaqu'un séparé par une virgule.
-Il n'est pas nécessaire de compléter tout les 0 après le dernier 1 remplie.
 
 Exemple d'utilisation:
-verification test2 0,0,1,0,1,1
-maximalite test2 1,0,1,0,1,0
-maximalite test2 1,0,1,0,1
-maximum_incomplete test2
+	verification test2 2,4,5
+	maximalite test2 0,2,4
+	maximum_incomplete test2
