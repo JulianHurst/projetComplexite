@@ -21,3 +21,9 @@ clean:
 
 cleanall: clean
 	rm -rf graph
+
+help: 
+	@echo "make 		Compile le projet"
+	@echo "make clean 	Supprime les fichiers objet (.o)"
+	@echo "make cleanall 	Supprime les fichiers objet (.o) et le binaire graph"
+	@echo "make help 	Affiche ce message d'aide"
