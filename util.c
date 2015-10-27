@@ -40,9 +40,18 @@ int contains(ens_de_sommets e,int x){
  */
 void print_ensemble(ens_de_sommets e){
     int i;
+    int k=0;
+    printf("Sommets de l'ensemble: ");
     for(i=0;i<e.n;i++){
-        printf("Sommet %d = %d\n",i,e.som[i]);
+        if(e.som[i]==1){
+            printf("%d",i);
+            k++;
+        }
+        if((i+1)<e.n && e.som[i+1]==1)
+            printf(", ");
     }
+    printf(".\n");
+    printf("Taille de l'ensemble: %d.\n",k);
 }
 
 /**
