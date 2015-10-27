@@ -39,7 +39,11 @@ int main(int argc, char *argv[]){
             printf("Nombre d'argument incorrect pour la fonction maximum incomplet.\n");
         }
     }else if(strcmp(argv[1],"maximum_exacte")==0){
-        /* A COMPLETER */
+        if(argc==3){
+            print_ensemble(maximum_complete(gl));
+        }else{
+            printf("Nombre d'argument incorrect pour la fonction maximum incomplet.\n");
+        }
     }else if(strcmp(argv[1],"maximum_incomplete")==0){
         if(argc==3){
             print_ensemble(maximimum_incomplete_l(gl));

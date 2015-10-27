@@ -191,6 +191,59 @@ ens_de_sommets calcul_maximal_bool(graphe_l G){
 }
 
 /**
+ * Lance la fonction récursive du calcul d'un ensemble sous-graphe désert maximum.
+ * @param G Graphe non-orienté
+ * @return Ensemble maximum calculé
+ * @author Kevin GARABEDIAN
+ * @complexite O(2^n)
+ */
+ens_de_sommets maximum_complete(graphe_l G){
+	ens_de_sommets e;
+	init_ens_de_sommets_bool(&e,G.n);
+	return maximum_complete_rec(G,e,0,0);
+}
+
+/**
+ * Fonction récursive du calcul d'un ensemble sous-graphe désert maximum.
+ * @param G Graphe non-orienté
+ * @param e ensemble de sommets manipulé
+ * @param card cardinalité courante de e
+ * @param bestCard meilleure cardinalité trouvé
+ * @return Ensemble maximum calculé
+ * @author Kevin GARABEDIAN
+ * @complexite O(2^n)
+ */
+ens_de_sommets maximum_complete_rec(graphe_l G,ens_de_sommets e, int card, int bestCard){
+	int i=0;
+	ens_de_sommets emax;
+	init_ens_de_sommets_bool(&emax,G.n);
+    ens_de_sommets tmp;
+	init_ens_de_sommets_bool(&tmp,G.n);
+
+	for(i=0;i<G.n;i++){
+		if(e.som[i]!=1){
+			e.som[i]=1;
+			if(verification_l_bool(G,e)){
+				card++;
+				if(card>bestCard){
+                    bestCard=card;
+                    copie_ens(e,&emax,G.n);
+				}
+				copie_ens(maximum_complete_rec(G,e,card,bestCard),&tmp,G.n);
+				int ctmp=count_ens(tmp);
+				if(ctmp>bestCard){
+                    bestCard=ctmp;
+                    copie_ens(tmp,&emax,G.n);
+				}
+				card--;
+			}
+			e.som[i]=0;
+		}
+	}
+	return emax;
+}
+
+/**
  * Calcul de manière incomplète un sous graphe desert maximum.
  * @param G Graphe non-orienté
  * @return L'ensemble maximum calculé
@@ -216,7 +269,7 @@ ens_de_sommets maximimum_incomplete_l(graphe_l G){
         //enregistre le meilleur ensemble
         if(Ktmp>Kmax){
             Kmax = Ktmp;
-            copie_ens(&e,&emax,G.n);
+            copie_ens(e,&emax,G.n);
         }
         //met à 0 pour le prochain passage dans la boucle
         init_ens_de_sommets_bool(&e,G.n);

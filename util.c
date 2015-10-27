@@ -52,10 +52,10 @@ void print_ensemble(ens_de_sommets e){
  * @param n entier correspondant à la taille des ensembles de sommet.
  * @author Tristan NARI
  */
-void copie_ens(ens_de_sommets *e_src,ens_de_sommets *e_dest,int n){
+void copie_ens(ens_de_sommets e_src,ens_de_sommets *e_dest,int n){
 	int i;
-	e_dest->n=e_src->n;
-	for(i=0; i<n; i++) e_dest->som[i] = e_src->som[i];
+	e_dest->n=e_src.n;
+	for(i=0; i<n; i++) e_dest->som[i] = e_src.som[i];
 }
 
 /**
@@ -74,4 +74,21 @@ void lecture_ens(ens_de_sommets *e,char liste_e[]){
 		smt = strtok(NULL,",");
 		i = i + 1;
 	}
+}
+
+/**
+ * Calcul le nombre de sommets à 1 d'un ensemble.
+ * @param e ensemble de sommets
+ * @return Nombre de sommets à 1
+ * @author Tristan NARI
+ * @complexite O(n)
+ */
+int count_ens(ens_de_sommets e){
+    int i;
+    int res =0;
+    for(i=0;i<e.n;i++){
+        if(e.som[i]==1)
+            res++;
+    }
+    return res;
 }
