@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
 	char * nfichier = argv[2];
 	init_graphe(&gl);
     if(!lecture(nfichier,&gl)){
-    	fprintf(stderr,"Le fichier n'existe pas ou ne peut pas être ouvert en lecture!\n");
+    	fprintf(stderr,"Le fichier n'existe pas ou ne peut pas Ãªtre ouvert en lecture!\n");
     	return 1;
     }
     ens_de_sommets e;
@@ -52,5 +52,12 @@ int main(int argc, char *argv[]){
         }
     }else{
         printf("Vous vous etes trompe dans le nom de la fonction.\n");
+				printf("Fonctions : \n");
+				printf("verification\n");
+				printf("maximalite\n");
+				printf("maximal\n");
+				printf("maximum_exacte\n");
+				printf("maximum_incomplete\n");
     }
+		return 0;
 }
